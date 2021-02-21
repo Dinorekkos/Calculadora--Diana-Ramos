@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Calculadora : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+   
+
+
+
+    public void Sumar()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    public void ShowInput()
     {
-        
+
     }
 }
