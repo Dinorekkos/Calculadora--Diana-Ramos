@@ -5,19 +5,18 @@ using UnityEngine.UI;
 
 public class Calculadora : MonoBehaviour
 {
-   
+
+
+    
 
 
 
     public void Sumar()
     {
-
+        Debug.Log("Input desde suma");
     }
 
 
 
-    public void ShowInput()
-    {
-
-    }
+   
 }
