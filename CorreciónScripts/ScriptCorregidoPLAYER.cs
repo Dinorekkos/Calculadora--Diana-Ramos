@@ -6,100 +6,89 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    //MoverJugador
-    private Rigidbody2D jugador;
-    public float maxspeed;
-    public  float mover;
+    //Move Player.
+    private Rigidbody2D playerRgb;
+    public float maxSpeed;
+    public  float movementPlayer;
    
-
-    //VoltearJugador
-    private bool voltearDerecha = true;
-    private SpriteRenderer jugadorVoltea;
+    //Turn Player.
+    private bool turnRight = true;
+    private SpriteRenderer turnPlayerSpriteRenderer;
     
-    //Saltar
-    public LayerMask capasuelo;
-    public Transform checarSuelo;
-    public float revisarSuelo = 0.2f;
-    public float saltoAltura;
-    public bool puedoSaltar = true;
-    public bool suelo = false;
+    //Jump Player.
+    public bool floor = false;
+    public LayerMask layerfloor;
+    public Transform checkFloor;
+    public float areaFloor = 0.2f;
+    public float highJump;
+    public bool canJump = true;
     
-    //anim Personaje 
+    
+    //Anim Player.
     public Animator animController;
-
     public GameObject gmGO;
     public GameManager gmScript;
     
-    
-    
-    
-    
-    
-    
+
     void Start()
     {
         PlayerPrefs.DeleteAll();
-        jugador = GetComponent<Rigidbody2D>();
-        jugadorVoltea= GetComponent<SpriteRenderer>();
+        playerRgb = GetComponent<Rigidbody2D>();
+        turnPlayerSpriteRenderer= GetComponent<SpriteRenderer>();
         animController = GetComponent<Animator>();
-
-    }
-    
-    void Update()
-    {
-        
-    }
-    
-    public void PuedesMoverte()
-    {
-        puedoSaltar = !puedoSaltar;
-    }
-    
-    void Voltear()
-    {
-        voltearDerecha = !voltearDerecha;
-        jugadorVoltea.flipX = !jugadorVoltea.flipX;
     }
 
-    public void Mover()
+    
+    public void CanMove()
     {
-        jugador.velocity = new Vector2(mover * maxspeed, jugador.velocity.y);
+        canJump = !canJump;
+    }
+    
+
+    void FlipPlayer()
+    {
+        turnRight = !turnRight;
+        turnPlayerSpriteRenderer.flipX = !turnPlayerSpriteRenderer.flipX;
+    }
+
+
+    public void MovePlayer()
+    {
+        playerRgb.velocity = new Vector2(movementPlayer * maxSpeed, playerRgb.velocity.y);
     }
 
 
     public void FixedUpdate()
     {
-        //MovimientoControles
-        mover = Input.GetAxis("Horizontal");
-        if (mover > 0 && !voltearDerecha)
+        //Control Movement.
+        movementPlayer = Input.GetAxis("Horizontal");
+
+        if (movementPlayer > 0 && !turnRight)
         {
-            Voltear();
+            FlipPlayer();
         }
-        else if (mover < 0 && voltearDerecha)
+        else if (movementPlayer < 0 && turnRight)
         {
-            Voltear();
+            FlipPlayer();
         }
+        MovePlayer();
         
-        Mover();
-        
-        if (puedoSaltar && suelo && Input.GetAxis("Jump") > 0)
+        if (canJump && floor && Input.GetAxis("Jump") > 0)
         {
-            
             animController.SetTrigger("JumpPlayer");
-            jugador.velocity = new Vector2(jugador.velocity.x, 0f);
-            jugador.AddForce(new Vector2(0, saltoAltura), ForceMode2D.Impulse);
-            suelo = false;
-            animController.SetBool("JuanitoAvanzarbool", false);
-            
+            playerRgb.velocity = new Vector2(playerRgb.velocity.x, 0f);
+            playerRgb.AddForce(new Vector2(0, highJump), ForceMode2D.Impulse);
+            floor = false;
+            animController.SetBool("JuanitoAvanzarbool", false); 
         }
-        suelo = Physics2D.OverlapCircle(checarSuelo.position, revisarSuelo, capasuelo);
+        floor = Physics2D.OverlapCircle(checkFloor.position, areaFloor, layerfloor);
         
-        //AnimsMOtion
-        AnimPersonaje();
+        //Anims Motion.
+        AnimMovement();
     }
 
 
-    public void AnimPersonaje()
+    public void AnimMovement()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -128,27 +117,22 @@ public class Player : MonoBehaviour
             AddScore();
             Destroy(other.gameObject);
         }
-
         if (other.gameObject.CompareTag("DeadzonePlayer"))
         {
             Debug.Log("JugadorTocoLava");
-            gmScript.JuegOfinal();
+            gmScript.GameOff();
         }
-
         if (other.gameObject.CompareTag("Bomb"))
         {
             Debug.Log("JugadorTocobbomba");
             Destroy(other.gameObject);
-            gmScript.JuegOfinal();
+            gmScript.GameOff();
         }
-        
     }
     
-
     void AddScore()
     {
         PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score") + 50);
     }
-    
 }
 
