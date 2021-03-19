@@ -27,7 +27,6 @@ public class Library : MonoBehaviour
 
     void Awake()
     {
-        
         LengthLibrary = 3;
         Debug.Log("Espacios disponibles de libros " + LengthLibrary);
         buttonReplace.SetActive(false);
@@ -67,7 +66,6 @@ public class Library : MonoBehaviour
         {
             LengthLibrary ++;
         }
-
     }
 
     public void ShowBook()
@@ -75,46 +73,21 @@ public class Library : MonoBehaviour
        Debug.Log("Libros en librería: "+ books.Count);
        Debug.Log("Espacios restantes en librería:  "+ LengthLibrary);
     }     
-
     public void ReplaceBook()
     {   
          Debug.Log("Ingresa un nuevo libro"); 
         Debug.Log("Selecciona el que quieras reemplazar");             
     }   
-    
-    public void BookContainer1()
+    public void BookContainer1(int replaceBook)
     {   
-        Debug.Log("Este es el libro: 1");
+        Debug.Log("Este es el libro: " + replaceBook);
         
-        books.RemoveAt(0);
+        books.RemoveAt(replaceBook);
         AddBook();
 
     } 
    
-
-   public void BookContainer2()
-   {
-       Debug.Log("Este es el libro: 1");
-        
-        books.RemoveAt(1);
-        AddBook();
-
-   }
-    
-    public void BookContainer3()
-    {
-        Debug.Log("Este es el libro: 1");
-        
-        books.RemoveAt(2);
-        AddBook();
-
-    }   
-        
-         
 }
-
-
-
 
 
 

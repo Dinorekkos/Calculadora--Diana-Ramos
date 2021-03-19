@@ -8,15 +8,14 @@ public class TimeController : MonoBehaviour
     
     TimeClass timeController = new TimeClass (0,0,0);
     
-    public float newSeconds, newMinutes, newhours;
-    public const float realSecondsDay = 43200f;
-   private float day;
+    //public float newSeconds, newMinutes, newhours;
+    public  float newTime = 60f;
+    
+    private float day;
     private GameObject clockHandHourMovement;
     private GameObject clockHandMinMovement;
     public Text newTXTtime;
     
-   
-  
 
      private void Awake() 
      {
@@ -30,20 +29,9 @@ public class TimeController : MonoBehaviour
         CountTime();
     }
     
-    public void ChangeTime()
-    {
-        timeController.GetTimeHour = newhours;
-        timeController.GetTimeMinutes = newMinutes;
-        timeController.GetTimeSeconds =newSeconds;
-
-         Debug.Log(timeController.GetTimeHour + ":" + timeController.GetTimeMinutes + ":" +  timeController.GetTimeSeconds);
-
-        newTXTtime.text = timeController.GetTimeHour + ":" + timeController.GetTimeMinutes + ":" +  timeController.GetTimeSeconds;
-    }
-
     public void CountTime()
     {
-        day += Time.deltaTime / realSecondsDay;
+        day += Time.deltaTime / newTime;
 
         float dayNormalized = day % 1f;
         float rotationsDay = 360f;
@@ -52,6 +40,7 @@ public class TimeController : MonoBehaviour
 
         float hoursInDay = 24f;
         clockHandMinMovement.gameObject.transform.eulerAngles = new Vector3(0,0, - dayNormalized * rotationsDay * hoursInDay);
+
 
         timeController.GetTimeHour = Mathf.Floor(dayNormalized * hoursInDay);
 

@@ -35,6 +35,10 @@ private void Awake()
         Debug.Log(randomCar1);
         Debug.Log(randomCar2);  
         CompareCars(randomCar1, randomCar2);
+        if(randomCar1 == randomCar2)
+        {
+
+        }
     }
 
     public void CompareCars(int index1, int index2)
