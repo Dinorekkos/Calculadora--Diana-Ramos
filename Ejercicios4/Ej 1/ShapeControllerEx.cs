@@ -46,8 +46,11 @@ public class ShapeControllerEx : MonoBehaviour
 
     [Header ("Data Rectangle")]
     
-    [SerializeField] private int rectanglePoint1;
-    [SerializeField] private int rectanglePoint2;
+    [SerializeField] private int rectanglePoint1X;
+    [SerializeField] private int rectanglePoint1Y;
+
+    [SerializeField] private int rectanglePoint2X;
+    [SerializeField] private int rectanglePoint2Y;
 
     [Header ("Data Circle")]
     [SerializeField] private int circleRadioPoint;
@@ -63,7 +66,7 @@ public class ShapeControllerEx : MonoBehaviour
 
 
 
-    RectangleClass rectangleObject = new RectangleClass(0,0);
+    RectangleClass rectangleObject = new RectangleClass(0,0,0,0);
     CircleClassEx circleObject = new CircleClassEx (0,0);
     TriangleClassEx triangleObject = new TriangleClassEx (0,0,0);
     
@@ -103,13 +106,13 @@ public class ShapeControllerEx : MonoBehaviour
 
     }
     
-
-
     // Get Inputs de las figuras
     private void GetInputsRectangule()
     {
-        rectangleObject.Point1Rectangle = rectanglePoint1;
-        rectangleObject.Point2Rectangle = rectanglePoint2;
+        rectangleObject.Point1RectangleX = rectanglePoint1X;
+        rectangleObject.Point1RectangleY = rectanglePoint1Y;
+        rectangleObject.Point2RectangleX = rectanglePoint2X;
+        rectangleObject.Point2RectangleY = rectanglePoint2Y;
 
     }
 
@@ -130,24 +133,26 @@ public class ShapeControllerEx : MonoBehaviour
     // Funciones de Rectangle
     public void GetRectangleBase()
     {
+        float baseRectangle;
         GetInputsRectangule();
-        Debug.Log(rectanglePoint1);
-        pointRectangle1.text = rectanglePoint1.ToString();
+        baseRectangle = rectanglePoint1X - rectanglePoint2X;
+        if (baseRectangle < 0 ) baseRectangle = rectanglePoint2X - rectanglePoint1X;
+        pointRectangle1.text = baseRectangle.ToString();
 
     }
     public void GetRectangleHeight()
     {   
         GetInputsRectangule();
-        Debug.Log(rectanglePoint2);
-        pointRectangle2.text = rectanglePoint2.ToString();
+       // Debug.Log(rectanglePoint2);
+        //pointRectangle2.text = rectanglePoint2.ToString();
     }
     public void GetRectanglePerimeter()
     {      
         GetInputsRectangule();
         float rectangleResultPerimeter;
         selectOperationRecatngle.text = "Perimeter";
-        rectangleResultPerimeter = rectanglePoint1 + rectanglePoint1 + rectanglePoint2 + rectanglePoint2;
-        resultRectangleTxt.text = rectangleResultPerimeter.ToString();
+        //rectangleResultPerimeter = rectanglePoint1 + rectanglePoint1 + rectanglePoint2 + rectanglePoint2;
+        //resultRectangleTxt.text = rectangleResultPerimeter.ToString();
 
     }
      public void GetRectangleArea()
@@ -155,8 +160,8 @@ public class ShapeControllerEx : MonoBehaviour
         GetInputsRectangule();
         float rectangleResultArea;
         selectOperationRecatngle.text = "Area";
-        rectangleResultArea = rectanglePoint1 * rectanglePoint2; 
-        resultRectangleTxt.text = rectangleResultArea.ToString();
+        //rectangleResultArea = rectanglePoint1 * rectanglePoint2; 
+       // resultRectangleTxt.text = rectangleResultArea.ToString();
     }
 
 
