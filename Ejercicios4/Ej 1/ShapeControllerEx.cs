@@ -24,51 +24,72 @@ public class ShapeControllerEx : MonoBehaviour
      [Header ("Texts Rectangle")]
 
      [SerializeField] private Text selectOperationRecatngle;
-     [SerializeField] private Text pointRectangle1;
-     [SerializeField] private Text pointRectangle2;
+     [SerializeField] private Text rectanglePoint1XYtxt;
+     [SerializeField] private Text rectanglePoint2XYtxt;
+     [SerializeField] private Text rectanglePointBasetxt;
+     [SerializeField] private Text rectanglePointHeightxt;
+    
+     
      [SerializeField] private Text resultRectangleTxt;
 
      
      [Header ("Texts Circle")]
       [SerializeField] private Text selectOperationCircle;
       [SerializeField] private Text radioCircleTxt;
-      [SerializeField] private Text centerCircleTxt;
+      [SerializeField] private Text diameterCircleTxt;
+      [SerializeField] private Text point1CircleTxt;
+      
+
       [SerializeField] private Text resultCircleTxt;
      
       [Header ("Texts Triangle")]
       [SerializeField] private Text selectOperationTriangle;
       [SerializeField] private Text resultTriangleTxt;
-
       [SerializeField] private Text edgePoint1Txt;
       [SerializeField] private Text edgePoint2Txt;
       [SerializeField] private Text edgePoint3Txt;
+       [SerializeField] private Text distance1to2Txt;
+       [SerializeField] private Text distance2to3Txt;
+       [SerializeField] private Text distance3to1Txt;
+      
 
 
-    [Header ("Data Rectangle")]
+    float baseRectangle;
+    float heightRectangle;
     
+     [Header ("Data Rectangle")]
     [SerializeField] private int rectanglePoint1X;
     [SerializeField] private int rectanglePoint1Y;
 
     [SerializeField] private int rectanglePoint2X;
     [SerializeField] private int rectanglePoint2Y;
 
+
+    float circleRadio;
+    float circleDiameter;
+
     [Header ("Data Circle")]
-    [SerializeField] private int circleRadioPoint;
-    [SerializeField] private int circleCenterPoint;
+    [SerializeField] private int circlePoint1X;
+    [SerializeField] private int circlePoint1Y;
+    [SerializeField] private int circlePointRadio;
+   
+
+    float distance1To2;
+    float distnace2To3;
+    float distance3To1;
 
     [Header ("Data Triangle")]
-    [SerializeField] private int trianglePoint1;
-    [SerializeField] private int trianglePoint2;
-    [SerializeField] private int trianglePoint3;
-
-
-
-
+    [SerializeField] private int trianglePoint1X;
+    [SerializeField] private int trianglePoint1Y;
+    [SerializeField] private int trianglePoint2X;
+    [SerializeField] private int trianglePoint2Y;
+    [SerializeField] private int trianglePoint3X;
+     [SerializeField] private int trianglePoint3Y;
 
 
     RectangleClass rectangleObject = new RectangleClass(0,0,0,0);
-    CircleClassEx circleObject = new CircleClassEx (0,0);
-    TriangleClassEx triangleObject = new TriangleClassEx (0,0,0);
+    CircleClassEx circleObject = new CircleClassEx (0,0,0);
+    TriangleClassEx triangleObject = new TriangleClassEx (0,0,0,0,0,0);
     
 
      private void Awake()
@@ -118,41 +139,53 @@ public class ShapeControllerEx : MonoBehaviour
 
     private void GetInputsCircle()
     {
-        circleObject.RadioCirclePoint = circleRadioPoint;
-        circleObject.CenterCirlcePoint = circleCenterPoint;
+       circleObject.CirclePoint1X = circlePoint1X;
+       circleObject.CirclePoitn1Y = circlePoint1Y;
+       circleObject.CirclePointRadio = circlePointRadio;
+      
 
     }
 
     private void GetInputsTriangle()
     {
-        triangleObject.TrianglePoint1 = trianglePoint1;
-        triangleObject.TrianglePoint2 = trianglePoint2;
-        triangleObject.TrinaglePoint3 = trianglePoint3;
+        triangleObject.TrianglePoint1X = trianglePoint1X;
+        triangleObject.TrianglePoint1Y = trianglePoint1Y;
+        triangleObject.TrianglePoint2X = trianglePoint2X;
+        triangleObject.TrianglePoint2Y = trianglePoint2Y;
+        triangleObject.TrianglePoint3X = trianglePoint3X;
+        triangleObject.TrianglePoint3Y = trianglePoint3Y; 
     }
 
     // Funciones de Rectangle
     public void GetRectangleBase()
     {
-        float baseRectangle;
+        
         GetInputsRectangule();
+        rectanglePoint1XYtxt.text = "(" + rectanglePoint1X.ToString() +"," + rectanglePoint1Y.ToString() + ")"; 
         baseRectangle = rectanglePoint1X - rectanglePoint2X;
         if (baseRectangle < 0 ) baseRectangle = rectanglePoint2X - rectanglePoint1X;
-        pointRectangle1.text = baseRectangle.ToString();
+        rectanglePointBasetxt.text = baseRectangle.ToString();
 
+       
     }
-    public void GetRectangleHeight()
-    {   
+    public void  GetRectangleHeight()
+    {  
         GetInputsRectangule();
-       // Debug.Log(rectanglePoint2);
-        //pointRectangle2.text = rectanglePoint2.ToString();
+        rectanglePoint2XYtxt.text = "(" + rectanglePoint2X.ToString() +"," + rectanglePoint2Y.ToString() + ")"; 
+        heightRectangle = rectanglePoint1Y - rectanglePoint2Y;
+        if (heightRectangle <= 0) heightRectangle = rectanglePoint2Y - rectanglePoint1Y;
+        rectanglePointHeightxt.text = heightRectangle.ToString();
+  
+       
     }
     public void GetRectanglePerimeter()
     {      
         GetInputsRectangule();
         float rectangleResultPerimeter;
         selectOperationRecatngle.text = "Perimeter";
-        //rectangleResultPerimeter = rectanglePoint1 + rectanglePoint1 + rectanglePoint2 + rectanglePoint2;
-        //resultRectangleTxt.text = rectangleResultPerimeter.ToString();
+        rectangleResultPerimeter = heightRectangle + heightRectangle + baseRectangle + baseRectangle;
+        resultRectangleTxt.text = rectangleResultPerimeter.ToString();
+       
 
     }
      public void GetRectangleArea()
@@ -160,8 +193,8 @@ public class ShapeControllerEx : MonoBehaviour
         GetInputsRectangule();
         float rectangleResultArea;
         selectOperationRecatngle.text = "Area";
-        //rectangleResultArea = rectanglePoint1 * rectanglePoint2; 
-       // resultRectangleTxt.text = rectangleResultArea.ToString();
+        rectangleResultArea =  baseRectangle * heightRectangle;
+        resultRectangleTxt.text = rectangleResultArea.ToString();
     }
 
 
@@ -170,8 +203,9 @@ public class ShapeControllerEx : MonoBehaviour
     {   
         GetInputsCircle();
         selectOperationCircle.text = "Radio";
-        Debug.Log (circleRadioPoint);
-        radioCircleTxt.text = circleRadioPoint.ToString();
+        circleRadio = circlePointRadio;
+        point1CircleTxt.text = "(" + circlePoint1X.ToString() + "," + circlePoint1Y.ToString() + ")";
+        radioCircleTxt.text = circleRadio.ToString();
     }
 
     public void GetCircleDiameter()
@@ -179,8 +213,8 @@ public class ShapeControllerEx : MonoBehaviour
         GetInputsCircle();
         float resultDiameter;
         selectOperationCircle.text = "Diameter";
-        resultDiameter = circleRadioPoint * 2;
-        centerCircleTxt.text = resultDiameter.ToString();
+        resultDiameter = circleRadio * 2;
+        diameterCircleTxt.text = resultDiameter.ToString();
         
     }
 
@@ -189,9 +223,8 @@ public class ShapeControllerEx : MonoBehaviour
         GetInputsCircle();
         double resultCirclePerimeter;
         selectOperationCircle.text = "Perimeter";
-        resultCirclePerimeter = (Math.PI * 2) * circleRadioPoint;
-        Debug.Log(resultCirclePerimeter);
-        resultCircleTxt.text = resultCirclePerimeter.ToString();
+        resultCirclePerimeter = (float)Math.Round((Math.PI * 2) * (circleRadio),2);
+       resultCircleTxt.text = resultCirclePerimeter.ToString();
     }
 
     public void GetCircleArea()
@@ -199,9 +232,9 @@ public class ShapeControllerEx : MonoBehaviour
         GetInputsCircle();
         double resultCircleArea;
         selectOperationCircle.text = "Area";
-        resultCircleArea = (Math.PI * Math.Pow(circleRadioPoint,2));
+        resultCircleArea = (float)Math.Round((Math.PI) * Math.Pow(circleRadio,2));
         resultCircleTxt.text = resultCircleArea.ToString();
-        Debug.Log(resultCircleArea);
+        
     }
 
     //Funciones Triangle
@@ -209,30 +242,41 @@ public class ShapeControllerEx : MonoBehaviour
     public void GetEdgesTriangle()
     {
         GetInputsTriangle();
-        edgePoint1Txt.text = trianglePoint1.ToString();
-        edgePoint2Txt.text = trianglePoint2.ToString();
-        edgePoint3Txt.text = trianglePoint3.ToString();
+        edgePoint1Txt.text = "(" + trianglePoint1X.ToString() + "," + trianglePoint1Y.ToString() + ")"; 
+        edgePoint2Txt.text = "(" + trianglePoint2X.ToString() + "," + trianglePoint2Y.ToString() + ")"; 
+        edgePoint3Txt.text = "(" + trianglePoint3X.ToString() + "," + trianglePoint3Y.ToString() + ")"; 
     
     }
     public void GetTriangle()
     {
         GetInputsTriangle();
         string triangleType;
-        selectOperationTriangle.text = "Triangle Type";
+       
+
+        distance1To2 = (float)Math.Round(Mathf.Sqrt(Mathf.Pow((trianglePoint2X - trianglePoint1X),2) + Mathf.Pow((trianglePoint2Y - trianglePoint1Y),2)), 2);
+        distnace2To3 = (float)Math.Round(Mathf.Sqrt(Mathf.Pow((trianglePoint3X - trianglePoint2X),2) + Mathf.Pow ((trianglePoint3Y - trianglePoint2Y),2)),2);
+        distance3To1 = (float)Math.Round (Mathf.Sqrt(Mathf.Pow((trianglePoint3X - trianglePoint1X),2) + Mathf.Pow ((trianglePoint3Y - trianglePoint1Y),2)),2);
+
+        distance1to2Txt.text = distance1To2.ToString();
+        distance2to3Txt.text = distnace2To3.ToString();
+        distance3to1Txt.text = distance3To1.ToString();
+       
+       
+       selectOperationTriangle.text = "Triangle Type";
         
-        if(trianglePoint1 == trianglePoint2 && trianglePoint1 == trianglePoint3 && trianglePoint2 == trianglePoint3)
+        if(distance1To2 == distnace2To3 && distnace2To3 == distance3To1 && distance1To2 == distance3To1)
         {
             triangleType  = "Equilatero";
             resultTriangleTxt.text = triangleType;
         }
 
-        if(trianglePoint1 == trianglePoint2  && trianglePoint2 != trianglePoint3)
+        if(distance1To2 == distnace2To3  && distnace2To3 != distance1To2)
         {
             triangleType  = "Isósceles";
             resultTriangleTxt.text = triangleType;
         }
 
-        if(trianglePoint1!=trianglePoint2 && trianglePoint1 != trianglePoint3 && trianglePoint2 != trianglePoint3)
+        if(distance1To2 != distnace2To3 && distance3To1!= distance1To2 && distnace2To3 != distance1To2)
         {
              triangleType  = "Escaleno";
              resultTriangleTxt.text = triangleType;
@@ -244,7 +288,7 @@ public class ShapeControllerEx : MonoBehaviour
         GetInputsTriangle();
         float trianglePerimeter;
         selectOperationTriangle.text = "Perimeter";
-        trianglePerimeter = trianglePoint1 + trianglePoint2 + trianglePoint3;
+        trianglePerimeter = distance1To2 + distnace2To3 + distance3To1;
         resultTriangleTxt.text = trianglePerimeter.ToString();
     }
 
@@ -255,12 +299,10 @@ public class ShapeControllerEx : MonoBehaviour
         float baseTriangle;
         float hightTraingle;
         selectOperationTriangle.text = "Area";
-        baseTriangle = trianglePoint1 - trianglePoint2;
-        if(baseTriangle<= 0) baseTriangle = trianglePoint2;
-        hightTraingle = trianglePoint1 - trianglePoint3;
-        if (hightTraingle<= 0) hightTraingle = trianglePoint3 - trianglePoint1;
+        baseTriangle = distance1To2;
+        hightTraingle = distnace2To3;
 
-        triangleArea = (baseTriangle * hightTraingle) /2;
+        triangleArea = (float) Math.Round((baseTriangle * hightTraingle) /2);
         resultTriangleTxt.text = triangleArea.ToString();
     }
 

@@ -50,6 +50,8 @@ public class TimeController : MonoBehaviour
         float secondsInMinutes = 60f;
         timeController.GetTimeSeconds = Mathf.Floor(((((dayNormalized * hoursInDay) % 1f) * minutesInHour) % 1f) * secondsInMinutes);
 
+        
+
        newTXTtime.text = timeController.GetTimeHour + ":" + timeController.GetTimeMinutes + ":" +  timeController.GetTimeSeconds;
     }
 
