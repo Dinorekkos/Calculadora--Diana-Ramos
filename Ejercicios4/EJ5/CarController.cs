@@ -4,18 +4,31 @@ using UnityEngine;
 public class CarController : MonoBehaviour
 {   
     System.Random randomCarSelected = new System.Random();
-    List<CarAtributes> carlist = new List<CarAtributes>();  
-    CarAtributes firstCar = new CarAtributes (4, 4, 8 , 4395, 275, 6, "BMW x6M");
-    CarAtributes secondCar = new CarAtributes (2, 4, 8 , 2995, 250, 6, "Audi S5 Cabriolet");
+    public List<CarAtributes> carlist = new List<CarAtributes>();  
+    public CarAtributes firstCar = new CarAtributes (4, 4, 8 , 4395, 275, 6, "BMW x6M");
+    public CarAtributes secondCar = new CarAtributes (2, 4, 8 , 2995, 250, 6, "Audi S5 Cabriolet");
     CarAtributes thirdCar = new CarAtributes (5, 5, 8 , 1332, 199, 6, "2020 Jeep Renegade");
     CarAtributes forthCar = new CarAtributes (5, 6, 4, 1798, 187, 9, "Honda Jade 2017");
     CarAtributes fifthCar = new CarAtributes (2, 2, 6 , 3493, 308, 6, "2016 Honda NSX II ");
     CarAtributes sixthCar = new CarAtributes (2, 2, 8 , 3902, 340, 7, "2019 Ferrari F8 Tributo");
     CarAtributes septhCar = new CarAtributes (2, 2, 8 , 3990, 340, 6, "Ferrari SF90 Spider");
     CarAtributes eightCar = new CarAtributes (2, 2, 6, 3995, 300, 7, "Porsche 718 Spyder");
-    CarAtributes ninthCar = new CarAtributes (2, 2, 12 , 6498, 320, 7, "Lamborghini Centenario");
-    CarAtributes tenthCar = new CarAtributes (2, 4, 5, 2480, 250, 7, "Audi TT RS Roadster");
-private void Awake() 
+    public CarAtributes ninthCar = new CarAtributes (2, 2, 12 , 6498, 320, 7, "Lamborghini Centenario");
+    public CarAtributes tenthCar = new CarAtributes (2, 4, 5, 2480, 250, 7, "Audi TT RS Roadster");
+
+   
+
+    public int goalDistance = 200;
+    public float distanceCar1;
+    public float distanceCar2;
+    public float timeCar1;
+    public float timeCar2;
+    public float lossTimeCar;
+
+     public int randomCar1;
+     public int randomCar2;
+
+public void Awake() 
 {
     carlist.Add(firstCar);
     carlist.Add(secondCar);
@@ -30,8 +43,8 @@ private void Awake()
 }
     public void SelectCars()
     {   
-        int randomCar1 = randomCarSelected.Next(1, carlist.Count);
-        int randomCar2 = randomCarSelected.Next(1, carlist.Count);   
+        randomCar1 = randomCarSelected.Next(1, carlist.Count);
+        randomCar2 = randomCarSelected.Next(1, carlist.Count);   
         Debug.Log(randomCar1);
         Debug.Log(randomCar2);  
         CompareCars(randomCar1, randomCar2);
@@ -44,13 +57,6 @@ private void Awake()
     public void CompareCars(int index1, int index2)
     {   
         
-        int goalDistance = 200;
-        float distanceCar1;
-        float distanceCar2;
-        float timeCar1;
-        float timeCar2;
-        float lossTimeCar;
-    
          CarAtributes tempo1 =  carlist[index1];
          CarAtributes tempo2 = carlist[index2];
 
@@ -98,6 +104,7 @@ private void Awake()
     public void ShowCars()
     {
         Debug.Log("CARRO 1 = " + firstCar.AtributesToString(firstCar));
+    
         Debug.Log("CARRO 2 = " + secondCar.AtributesToString(secondCar));
         Debug.Log("CARRO 3 = " + thirdCar.AtributesToString(thirdCar));
         Debug.Log("CARRO 4 = " + forthCar.AtributesToString(forthCar));

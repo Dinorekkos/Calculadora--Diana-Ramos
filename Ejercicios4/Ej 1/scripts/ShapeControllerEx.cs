@@ -128,7 +128,7 @@ public class ShapeControllerEx : MonoBehaviour
     }
     
     // Get Inputs de las figuras
-    private void GetInputsRectangule()
+    public void GetInputsRectangule()
     {
         rectangleObject.Point1RectangleX = rectanglePoint1X;
         rectangleObject.Point1RectangleY = rectanglePoint1Y;
@@ -137,7 +137,7 @@ public class ShapeControllerEx : MonoBehaviour
 
     }
 
-    private void GetInputsCircle()
+    public void GetInputsCircle()
     {
        circleObject.CirclePoint1X = circlePoint1X;
        circleObject.CirclePoitn1Y = circlePoint1Y;
@@ -146,7 +146,7 @@ public class ShapeControllerEx : MonoBehaviour
 
     }
 
-    private void GetInputsTriangle()
+   public void GetInputsTriangle()
     {
         triangleObject.TrianglePoint1X = trianglePoint1X;
         triangleObject.TrianglePoint1Y = trianglePoint1Y;
@@ -157,24 +157,26 @@ public class ShapeControllerEx : MonoBehaviour
     }
 
     // Funciones de Rectangle
-    public void GetRectangleBase()
+    public float GetRectangleBase()
     {
         
         GetInputsRectangule();
-        rectanglePoint1XYtxt.text = "(" + rectanglePoint1X.ToString() +"," + rectanglePoint1Y.ToString() + ")"; 
+       // rectanglePoint1XYtxt.text = "(" + rectanglePoint1X.ToString() +"," + rectanglePoint1Y.ToString() + ")"; 
         baseRectangle = rectanglePoint1X - rectanglePoint2X;
-        if (baseRectangle < 0 ) baseRectangle = rectanglePoint2X - rectanglePoint1X;
-        rectanglePointBasetxt.text = baseRectangle.ToString();
+        if (baseRectangle <= 0 ) baseRectangle = rectanglePoint2X - rectanglePoint1X;
+        //rectanglePointBasetxt.text = baseRectangle.ToString();
+        return baseRectangle;
 
        
     }
-    public void  GetRectangleHeight()
+    public float GetRectangleHeight()
     {  
         GetInputsRectangule();
-        rectanglePoint2XYtxt.text = "(" + rectanglePoint2X.ToString() +"," + rectanglePoint2Y.ToString() + ")"; 
+       // rectanglePoint2XYtxt.text = "(" + rectanglePoint2X.ToString() +"," + rectanglePoint2Y.ToString() + ")"; 
         heightRectangle = rectanglePoint1Y - rectanglePoint2Y;
         if (heightRectangle <= 0) heightRectangle = rectanglePoint2Y - rectanglePoint1Y;
-        rectanglePointHeightxt.text = heightRectangle.ToString();
+        //rectanglePointHeightxt.text = heightRectangle.ToString();
+        return heightRectangle;
   
        
     }
@@ -188,13 +190,15 @@ public class ShapeControllerEx : MonoBehaviour
        
 
     }
-     public void GetRectangleArea()
+     public float GetRectangleArea()
     {
         GetInputsRectangule();
         float rectangleResultArea;
-        selectOperationRecatngle.text = "Area";
+       // selectOperationRecatngle.text = "Area";
         rectangleResultArea =  baseRectangle * heightRectangle;
-        resultRectangleTxt.text = rectangleResultArea.ToString();
+        //resultRectangleTxt.text = rectangleResultArea.ToString();
+        return rectangleResultArea;
+
     }
 
 
