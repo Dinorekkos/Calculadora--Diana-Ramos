@@ -1,3 +1,4 @@
+using System;
 public class Character
 {
     // Attributes    
@@ -35,6 +36,20 @@ public class Character
     public Character()
     {
 
+    }
+
+    // Methods
+    public int criticalHit(int lucky)
+    {
+        Random random = new Random();
+        int critHit = random.Next(255);
+        int accuracy = random.Next(255);
+        int hit = 1;
+        if(critHit > accuracy - lucky && critHit < accuracy + lucky)
+        {
+            hit = 2;
+        }
+        return hit;
     }
 
     // Properties

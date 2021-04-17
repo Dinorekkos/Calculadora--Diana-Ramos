@@ -13,11 +13,12 @@ public class Enemy: Character
 
     }
 
+    // Axel Jurado 15
     public void createRandomStatus(int level)
     {
         Random random = new Random();
         this.Level = level; 
-        this.LifePoints = (level*2) + (int)(random.Next(level)*0.5);
+        this.LifePoints = (level*2) + (int)(random.Next(level)*0.5);// Max
         this.MagicPoints = (int)(level*0.4) + (int)(random.Next(level)*0.2);
         this.Stamina = random.Next(level) - (int)(random.Next(level)/3);
         this.Speed = random.Next(level) - (int)(random.Next(level)/3);
@@ -28,7 +29,8 @@ public class Enemy: Character
         this.Experience = 0;
     }
 
-    public void createMagicEnemy(int level)
+    // Angel Legorreta 17
+    public void createMagicEnemy(int level) 
     {
         Random random = new Random();
         this.Level = level; 
@@ -42,21 +44,31 @@ public class Enemy: Character
         this.Live = true;
         this.Experience = 0;
     }
-    //ME level 11
+
+
+    
+    // Diana 12
     public void createBarbarianEnemy(int level)
     {
         Random random = new Random();
         this.Level = level; 
-        this.LifePoints = (level*3) + (int)(random.Next(level)*0.5);
-        this.MagicPoints = (int)(level*0) + (int)(random.Next(level));
-        this.Stamina = random.Next(level)*2 - (int)(random.Next(level)/5);
-        this.Speed = random.Next(level)*2 - (int)(random.Next(level));
-        this.Defense = random.Next(level) - (int)(random.Next(level));
-        this.Attack = random.Next(level)*3 - (int)(random.Next(level));
-        this.Lucky = (int)random.Next(level)/10;
+        this.LifePoints = (level*3) + (int)(random.Next(level)*0.5); //Max= 41 Min=36
+        this.MagicPoints = (int)(level*0) + (int)(random.Next(level)); //MIN 0, MAX 11
+        this.Stamina = random.Next(level)*2 - (int)(random.Next(level)/5);// MIN 2 MAX 19
+        this.Speed = random.Next(level)*2 - (int)(random.Next(level)); // MIN 11 MAX 33
+        this.Defense = random.Next(level) - (int)(random.Next(level)); //MIN =0, MAX = 11
+        this.Attack = random.Next(level)*3 - (int)(random.Next(level)); //MIN = 0, MAX= 33
+        this.Lucky = (int)random.Next(level)/10; // MIN 0 MAX 1
         this.Live = true;
         this.Experience = 0;
     }
+
+
+
+
+
+
+    // Navarrete 19
     public void createTankEnemy(int level)
     {
         Random random = new Random();
@@ -66,12 +78,12 @@ public class Enemy: Character
         this.Stamina = random.Next(level)*2 - (int)(random.Next(level)/2);
         this.Speed = random.Next(level)/5;
         this.Defense = random.Next(level)*5 - (int)(random.Next(level));
-        this.Attack = random.Next(level)/10;
-        this.Lucky = random.Next(level)/20;
+        this.Attack = (int)random.Next(level)/10;
+        this.Lucky = (int)random.Next(level)/20;
         this.Live = true;
         this.Experience = 0;
     }
-
+    // Oscar Albeart 14
     public void createDPSEnemy(int level)
     {
         Random random = new Random();
@@ -86,13 +98,13 @@ public class Enemy: Character
         this.Live = true;
         this.Experience = 0;
     }
-
+    // Fer Cossio 25
     public void createSupportEnemy(int level)
     {
         Random random = new Random();
         this.Level = level; 
         this.LifePoints = (level) + (int)(random.Next(level)*0.5);
-        this.MagicPoints = (int)(level)*3 - (int)(random.Next(level));
+        this.MagicPoints = (level)*3 - (int)(random.Next(level));
         this.Stamina = random.Next(level);
         this.Speed = random.Next(level) - (int)(random.Next(level));
         this.Defense = random.Next(level);
@@ -116,6 +128,8 @@ public class Enemy: Character
         this.Live = true;
         this.Experience = 0;
     }
+
+    // Raymundo 11
     public void createBossEnemy(int level)
     {
         Random random = new Random();
@@ -130,6 +144,8 @@ public class Enemy: Character
         this.Live = true;
         this.Experience = 0;
     }
+    
+    // Raul Estrada 12
     public void createMiniBossEnemy(int level)
     {
         Random random = new Random();
@@ -145,6 +161,7 @@ public class Enemy: Character
         this.Experience = 0;
     }
 
+    // Aviles 14
     public void createFinalBossEnemy(int level)
     {
         Random random = new Random();
